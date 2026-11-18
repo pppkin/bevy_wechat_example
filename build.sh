@@ -9,14 +9,14 @@
 #
 # 微信小游戏的主包必须绑定你自己的小游戏 AppID：
 #
-#   WECHAT_APPID=wx1234567890abcdef ./build.sh
+#   WECHAT_APPID=<your-mini-game-appid> ./build.sh
 set -euo pipefail
 cd "$(dirname "$0")"
 
 APPID=${WECHAT_APPID:-}
 if [ -z "$APPID" ]; then
   echo "缺少 WECHAT_APPID：微信小游戏必须用小游戏 AppID 打开和预览（touristappid 不生效）。" >&2
-  echo "用法：WECHAT_APPID=wx1234567890abcdef ./build.sh" >&2
+  echo "用法：WECHAT_APPID=<your-mini-game-appid> ./build.sh" >&2
   exit 1
 fi
 

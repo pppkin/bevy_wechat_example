@@ -63,7 +63,7 @@ brew install esbuild        # 可选
 微信小游戏必须绑定你自己的小游戏 AppID（`touristappid` 对小游戏不生效）：
 
 ```bash
-WECHAT_APPID=wx1234567890abcdef ./build.sh
+WECHAT_APPID=<your-mini-game-appid> ./build.sh
 ```
 
 首次约 3 分钟，之后增量约 1 分钟。构建完成后 `platforms/wechat/package/` 里是：
