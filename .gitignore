@@ -1,0 +1,9 @@
+# Rust
+/target
+**/target
+
+# 构建产物：整包都由 ./build.sh 生成（源码只有 platforms/wechat/src）
+/platforms/wechat/package/
+
+# macOS
+.DS_Store

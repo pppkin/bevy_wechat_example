@@ -1,0 +1,4 @@
+[submodule "addons/bevy-wechat"]
+	path = addons/bevy-wechat
+	url = git@gitee.com:pppkin/bevy_wechat.git
+	branch = main

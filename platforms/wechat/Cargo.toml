@@ -1,0 +1,46 @@
+[package]
+name = "pong_wechat"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[dependencies]
+# 只启用这个示例真正用到的 2D 插件。`2d` 这个 umbrella feature 还会拉进
+# Bevy UI、picking、scene、PNG 解码、gizmo 等，对 4 MB 主包很不划算。
+#
+# 用到新的 API 时再逐个加 feature；本示例刻意不用文字（没有 bevy_text），
+# 分数用计分块表示，所以也不需要字体资源。
+bevy = { version = "0.20", default-features = false, features = [
+  "std",
+  "async_executor",
+  "bevy_asset",
+  "bevy_log",
+  "bevy_window",
+  "bevy_winit",
+  "webgl2",
+  "bevy_camera",
+  "bevy_render",
+  "bevy_core_pipeline",
+  "bevy_sprite",
+  "bevy_sprite_render",
+  "bevy_audio",
+  "wav",
+] }
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+# 宿主桥通过 Reflect 读适配层发布的 shim window；微信没有 eval。
+# 版本必须和 wasm-bindgen CLI 一致（0.2.129），否则 glue 补丁会失配。
+js-sys = "=0.3.106"
+wasm-bindgen = "=0.2.129"
+
+# wasm 包是唯一目标：小体积、panic 即 abort。
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
+
+# 桌面 `cargo check` 快一点；本示例没有为桌面准备 wgpu 后端，不保证能跑。
+[profile.dev]
+opt-level = 1
